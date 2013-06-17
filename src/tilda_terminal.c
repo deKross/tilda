@@ -573,8 +573,11 @@ static gint tilda_term_config_defaults (tilda_term *tt)
     vte_terminal_set_word_chars (VTE_TERMINAL(tt->vte_term), word_chars);
 
     /** Background **/
-    if (config_getbool ("use_image"))
+    if (config_getbool ("use_image")) {
         vte_terminal_set_background_image_file (VTE_TERMINAL(tt->vte_term), config_getstr ("image"));
+        vte_terminal_set_background_saturation (VTE_TERMINAL (tt->vte_term), 1);
+        vte_terminal_set_opacity (VTE_TERMINAL (tt->vte_term), 0xffff);
+    }
     else
         vte_terminal_set_background_image_file (VTE_TERMINAL(tt->vte_term), NULL);
 
